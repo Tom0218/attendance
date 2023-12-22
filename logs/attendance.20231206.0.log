@@ -1,0 +1,29 @@
+10:36:32.024 INFO  [main][AttendanceApplication.logStarting(StartupInfoLogger.java:55)] Starting AttendanceApplication using Java 17.0.2 on DESKTOP-DG5SNN9 with PID 14316 (D:\產業尖兵\Java_project\attendance\bin\main started by TOM HSIEH in D:\產業尖兵\Java_project\attendance)
+10:36:32.046 INFO  [main][AttendanceApplication.logStartupProfileInfo(SpringApplication.java:632)] No active profile set, falling back to 1 default profile: "default"
+10:36:34.202 INFO  [main][RepositoryConfigurationDelegate.registerRepositoriesIn(RepositoryConfigurationDelegate.java:132)] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+10:36:34.467 INFO  [main][RepositoryConfigurationDelegate.registerRepositoriesIn(RepositoryConfigurationDelegate.java:201)] Finished Spring Data repository scanning in 237 ms. Found 5 JPA repository interfaces.
+10:36:36.156 INFO  [main][TomcatWebServer.initialize(TomcatWebServer.java:108)] Tomcat initialized with port(s): 8081 (http)
+10:36:36.177 INFO  [main][Http11NioProtocol.log(DirectJDKLog.java:173)] Initializing ProtocolHandler ["http-nio-8081"]
+10:36:36.180 INFO  [main][StandardService.log(DirectJDKLog.java:173)] Starting service [Tomcat]
+10:36:36.180 INFO  [main][StandardEngine.log(DirectJDKLog.java:173)] Starting Servlet engine: [Apache Tomcat/9.0.82]
+10:36:36.552 INFO  [main][[/].log(DirectJDKLog.java:173)] Initializing Spring embedded WebApplicationContext
+10:36:36.553 INFO  [main][ServletWebServerApplicationContext.prepareWebApplicationContext(ServletWebServerApplicationContext.java:292)] Root WebApplicationContext: initialization completed in 4316 ms
+10:36:37.018 INFO  [main][HikariDataSource.getConnection(HikariDataSource.java:110)] HikariPool-1 - Starting...
+10:36:37.627 INFO  [main][HikariDataSource.getConnection(HikariDataSource.java:123)] HikariPool-1 - Start completed.
+10:36:37.778 INFO  [main][LogHelper.logPersistenceUnitInformation(LogHelper.java:31)] HHH000204: Processing PersistenceUnitInfo [name: default]
+10:36:38.022 INFO  [main][Version.logVersion(Version.java:44)] HHH000412: Hibernate ORM core version 5.6.15.Final
+10:36:38.551 INFO  [main][Version.<clinit>(JavaReflectionManager.java:56)] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+10:36:38.965 INFO  [main][Dialect.<init>(Dialect.java:175)] HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+10:36:40.389 INFO  [main][JtaPlatformInitiator.initiateService(JtaPlatformInitiator.java:52)] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+10:36:40.404 INFO  [main][LocalContainerEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:437)] Initialized JPA EntityManagerFactory for persistence unit 'default'
+10:36:41.487 WARN  [main][JpaBaseConfiguration$JpaWebConfiguration.openEntityManagerInViewInterceptor(JpaBaseConfiguration.java:223)] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+10:36:42.489 WARN  [main][UserDetailsServiceAutoConfiguration.getOrDeducePassword(UserDetailsServiceAutoConfiguration.java:89)] 
+
+Using generated security password: 94d3e775-8954-4c9d-84c3-f9937d1e3b29
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+10:36:42.776 INFO  [main][DefaultSecurityFilterChain.<init>(DefaultSecurityFilterChain.java:55)] Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6d658aa8, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@10280879, org.springframework.security.web.context.SecurityContextPersistenceFilter@4c599679, org.springframework.security.web.header.HeaderWriterFilter@41f5389f, org.springframework.security.web.csrf.CsrfFilter@2119b989, org.springframework.security.web.authentication.logout.LogoutFilter@48da5106, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@68cb8e52, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@b5bddfe, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@3472f3ab, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@84eafc2, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@f13e0a2, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@329efc61, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5e557671, org.springframework.security.web.session.SessionManagementFilter@396c1228, org.springframework.security.web.access.ExceptionTranslationFilter@22c4354d, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@370a935f]
+10:36:42.949 INFO  [main][Http11NioProtocol.log(DirectJDKLog.java:173)] Starting ProtocolHandler ["http-nio-8081"]
+10:36:43.059 INFO  [main][TomcatWebServer.start(TomcatWebServer.java:220)] Tomcat started on port(s): 8081 (http) with context path ''
+10:36:43.087 INFO  [main][AttendanceApplication.logStarted(StartupInfoLogger.java:61)] Started AttendanceApplication in 11.9 seconds (JVM running for 13.244)
