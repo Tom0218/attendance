@@ -3,6 +3,7 @@ package com.example.attendance.contants;
 public enum RtnCode {
 
 	SUCCESSFUL(200, "Successful!!"),//
+	SEARCH_DEPARTMENT_SUCCESSFUL(200, "Search department successful!!"),//
 	PARAM_ERROR(400,"Param error !!"),//
 	ID_HAS_EXISTED(400,"Id has existed!!"),//
 	DEPARTMENT_NOT_FOUND(404,"Department not found!!"),//

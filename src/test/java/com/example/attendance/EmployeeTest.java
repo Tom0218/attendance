@@ -22,10 +22,10 @@ public class EmployeeTest {
 	@Test
 	public void createAdnimTest() {
 		Employee employee = employeeDao.save(new Employee(
-				"Admin", 
-				"ADMIN", 
-				"admin", 
-				encoder.encode("$ADMIN^_^Otp"),
+				"Admin", //id
+				"ADMIN", //department
+				"admin", //name
+				encoder.encode("$ADMIN^_^Otp"),//password
 				"admin@G",
 				"99",
 				LocalDate.now(),

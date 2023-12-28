@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
@@ -13,6 +14,7 @@ import com.example.attendance.entity.Department;
 import com.example.attendance.repository.DepartmentDao;
 import com.example.attendance.service.ifs.DepartmentService;
 import com.example.attendance.vo.DepartmentCreateReq;
+import com.example.attendance.vo.DepartmentSearchRes;
 import com.example.attendance.vo.BasicRes;
 
 @Service
@@ -40,6 +42,13 @@ public class DepartmentServiceImpl implements DepartmentService{
 		}
 		dao.saveAll(req.getDepList());
 		return new BasicRes(RtnCode.SUCCESSFUL);
+	}
+
+	@CacheEvict(cacheNames = "update", allEntries = true)
+	@Override
+	public DepartmentSearchRes searchAllDepartment() {
+		List<Department> DepartmentList = dao.findAll();
+		return new DepartmentSearchRes(DepartmentList,RtnCode.SEARCH_DEPARTMENT_SUCCESSFUL);
 	}
 
 

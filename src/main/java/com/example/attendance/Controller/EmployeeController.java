@@ -32,6 +32,9 @@ public class EmployeeController {
 		if (session.getAttribute(req.getId()) == null) {
 			return service.login(req.getId(), req.getPwd(), session);
 		}
+		session.setAttribute("id", req.getId());
+		session.setAttribute("password", req.getPwd());
+		session.setMaxInactiveInterval(300);// 設定session有效時間，單位:second
 		return new BasicRes(RtnCode.SUCCESSFUL);
 
 	}
