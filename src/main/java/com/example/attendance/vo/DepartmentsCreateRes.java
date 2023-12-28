@@ -2,16 +2,16 @@ package com.example.attendance.vo;
 
 import com.example.attendance.constants.RtnCode;
 
-public class BasicRes {
+public class DepartmentsCreateRes {
 
 	public RtnCode rtnCode;
 	
 
-	public BasicRes() {
+	public DepartmentsCreateRes() {
 		super();
 	}
 
-	public BasicRes(RtnCode rtnCode) {
+	public DepartmentsCreateRes(RtnCode rtnCode) {
 		super();
 		this.rtnCode = rtnCode;
 	}

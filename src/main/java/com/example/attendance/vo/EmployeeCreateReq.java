@@ -2,7 +2,7 @@ package com.example.attendance.vo;
 
 import com.example.attendance.entity.Employee;
 
-public class EmployeeCreatReq extends Employee {
+public class EmployeeCreateReq extends Employee{
 
 	private String creatorId;
 
@@ -13,7 +13,6 @@ public class EmployeeCreatReq extends Employee {
 	public void setCreatorId(String creatorId) {
 		this.creatorId = creatorId;
 	}
-
 	
-
+	
 }

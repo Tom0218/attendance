@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -12,6 +14,7 @@ import javax.persistence.Table;
 @Table(name = "leave_application")
 public class LeaveApplication {
 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 	@Column(name = "serial_no")
 	private int serialNo;
@@ -28,14 +31,17 @@ public class LeaveApplication {
 	@Column(name = "leave_type")
 	private String leaveType;
 
-	@Column(name = "leave_start_date")
-	private LocalDateTime leaveStartDate;
+	@Column(name = "leave_start_datetime")
+	private LocalDateTime leaveStartDatetime;
 
-	@Column(name = "leave_end_date")
-	private LocalDateTime leaveEndDate;
+	@Column(name = "leave_end_datetime")
+	private LocalDateTime leaveEndDatetime;
 
-	@Column(name = "total_hours")
-	private LocalDateTime totalHours;
+	@Column(name = "total_hour")
+	private int totalHour;
+
+	@Column(name = "reason")
+	private String reason;
 
 	@Column(name = "leave_reason")
 	private String leaveReason;
@@ -57,7 +63,7 @@ public class LeaveApplication {
 
 	@Column(name = "update_datetime")
 	private LocalDateTime updateDatetime;
-	
+
 	@Column(name = "certification")
 	private byte[] certification;
 
@@ -67,17 +73,18 @@ public class LeaveApplication {
 	}
 
 	public LeaveApplication(String applicationNo, String employeeId, String employeeDepartment, String leaveType,
-			LocalDateTime leaveStartDate, LocalDateTime leaveEndDate, LocalDateTime totalHours, String leaveReason,
-			String reviewerId, LocalDateTime reviewerDatetime, String reviewerStatus, String rejectReason,
-			LocalDateTime appliedDatetime, LocalDateTime updateDatetime) {
+			LocalDateTime leaveStartDatetime, LocalDateTime leaveEndDatetime, int totalHour, String reason,
+			String leaveReason, String reviewerId, LocalDateTime reviewerDatetime, String reviewerStatus,
+			String rejectReason, LocalDateTime appliedDatetime, LocalDateTime updateDatetime) {
 		super();
 		this.applicationNo = applicationNo;
 		this.employeeId = employeeId;
 		this.employeeDepartment = employeeDepartment;
 		this.leaveType = leaveType;
-		this.leaveStartDate = leaveStartDate;
-		this.leaveEndDate = leaveEndDate;
-		this.totalHours = totalHours;
+		this.leaveStartDatetime = leaveStartDatetime;
+		this.leaveEndDatetime = leaveEndDatetime;
+		this.totalHour = totalHour;
+		this.reason = reason;
 		this.leaveReason = leaveReason;
 		this.reviewerId = reviewerId;
 		this.reviewerDatetime = reviewerDatetime;
@@ -86,23 +93,24 @@ public class LeaveApplication {
 		this.appliedDatetime = appliedDatetime;
 		this.updateDatetime = updateDatetime;
 	}
-	
+
 	public LeaveApplication(LeaveApplication application) {
 		super();
 		this.applicationNo = application.getApplicationNo();
 		this.employeeId = application.getEmployeeId();
 		this.employeeDepartment = application.getEmployeeDepartment();
 		this.leaveType = application.getLeaveType();
-		this.leaveStartDate = application.getLeaveStartDate();
-		this.leaveEndDate = application.getLeaveEndDate();
-		this.totalHours = application.getTotalHours();
+		this.leaveStartDatetime = application.getLeaveStartDatetime();
+		this.leaveEndDatetime = application.getLeaveEndDatetime();
+		this.totalHour = application.getTotalHour();
+		this.reason = application.getReason();
 		this.leaveReason = application.getLeaveReason();
 		this.reviewerId = application.getReviewerId();
 		this.reviewerDatetime = application.getReviewerDatetime();
 		this.reviewerStatus = application.getReviewerStatus();
-		this.rejectReason = application.rejectReason;
-		this.appliedDatetime = application.appliedDatetime;
-		this.updateDatetime = application.updateDatetime;
+		this.rejectReason = application.getRejectReason();
+		this.appliedDatetime = application.getAppliedDatetime();
+		this.updateDatetime = application.getUpdateDatetime();
 	}
 
 	public int getSerialNo() {
@@ -111,6 +119,14 @@ public class LeaveApplication {
 
 	public void setSerialNo(int serialNo) {
 		this.serialNo = serialNo;
+	}
+
+	public String getApplicationNo() {
+		return applicationNo;
+	}
+
+	public void setApplicationNo(String applicationNo) {
+		this.applicationNo = applicationNo;
 	}
 
 	public String getEmployeeId() {
@@ -137,28 +153,36 @@ public class LeaveApplication {
 		this.leaveType = leaveType;
 	}
 
-	public LocalDateTime getLeaveStartDate() {
-		return leaveStartDate;
+	public LocalDateTime getLeaveStartDatetime() {
+		return leaveStartDatetime;
 	}
 
-	public void setLeaveStartDate(LocalDateTime leaveStartDate) {
-		this.leaveStartDate = leaveStartDate;
+	public void setLeaveStartDatetime(LocalDateTime leaveStartDatetime) {
+		this.leaveStartDatetime = leaveStartDatetime;
 	}
 
-	public LocalDateTime getLeaveEndDate() {
-		return leaveEndDate;
+	public LocalDateTime getLeaveEndDatetime() {
+		return leaveEndDatetime;
 	}
 
-	public void setLeaveEndDate(LocalDateTime leaveEndDate) {
-		this.leaveEndDate = leaveEndDate;
+	public void setLeaveEndDatetime(LocalDateTime leaveEndDatetime) {
+		this.leaveEndDatetime = leaveEndDatetime;
 	}
 
-	public LocalDateTime getTotalHours() {
-		return totalHours;
+	public int getTotalHour() {
+		return totalHour;
 	}
 
-	public void setTotalHours(LocalDateTime totalHours) {
-		this.totalHours = totalHours;
+	public void setTotalHour(int totalHour) {
+		this.totalHour = totalHour;
+	}
+
+	public String getReason() {
+		return reason;
+	}
+
+	public void setReason(String reason) {
+		this.reason = reason;
 	}
 
 	public String getLeaveReason() {
@@ -217,14 +241,6 @@ public class LeaveApplication {
 		this.updateDatetime = updateDatetime;
 	}
 
-	public String getApplicationNo() {
-		return applicationNo;
-	}
-
-	public void setApplicationNo(String applicationNo) {
-		this.applicationNo = applicationNo;
-	}
-
 	public byte[] getCertification() {
 		return certification;
 	}
@@ -232,7 +248,5 @@ public class LeaveApplication {
 	public void setCertification(byte[] certification) {
 		this.certification = certification;
 	}
-
-	
 
 }

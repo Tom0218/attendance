@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.example.attendance.entity.AuthCode;
 
 @Repository
-public interface AuthCodeDao extends JpaRepository<AuthCode,String>{
+public interface AuthCodeDao extends JpaRepository<AuthCode, String>{
 
 }

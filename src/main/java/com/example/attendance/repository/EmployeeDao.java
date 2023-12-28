@@ -17,25 +17,22 @@ public interface EmployeeDao extends JpaRepository<Employee, String> {
 
 	public Employee findByEmail(String email);
 
-//	clearAutomatically = true:清除持久化上下文;即清除暫存資料
+	@Modifying(clearAutomatically = true)
+	@Transactional
+	@Query(value = "update Employee set active = :inputAction where id = :inputId")
+	public int updateActivate(@Param("input") String employeeId, @Param("inputAction") boolean active);
 
 	@Modifying(clearAutomatically = true)
 	@Transactional
-	@Query(value = "update Employee set active =:inputActive where id = :inputId") // @Query回傳的格式為int
-	public int updateActivate(@Param("inputId") String employeeId, @Param("inputActive") boolean active);
-
-	
-	@Modifying(clearAutomatically = true)
-	@Transactional
-	@Query(value = "UPDATE Employee AS e SET "
-			+ " department  = CASE WHEN :inputDepartment  IS NULL THEN e.department   ELSE :inputDepartment END,"
-			+ " name        = CASE WHEN :inputName        IS NULL THEN e.name         ELSE :inputName END,"
-			+ " email       = CASE WHEN :inputEmail       IS NULL THEN e.email        ELSE :inputEmail END,"
-			+ " jobPosition = CASE WHEN :inputJobPosition IS NULL THEN e.jobPosition  ELSE :inputJobPosition END,"
-			+ " birthDate   = CASE WHEN :inputBirthDate   IS NULL THEN e.birthDate    ELSE :inputBirthDate END,"
-			+ " arrivalDate = CASE WHEN :inputArrivalDate IS NULL THEN e.arrivalDate  ELSE :inputArrivalDate END,"
-			+ " annualLeave = CASE WHEN :inputAnnualLeave = 0     THEN  e.annualLeave  ELSE :inputAnnualLeave END,"
-			+ " sickLeave   = CASE WHEN :inputSickLeave   = 0     THEN  e.sickLeave    ELSE :inputSickLeave END"
+	@Query(value = "update Employee as e set "
+			+ " department  = case when :inputDepartment  is null then e.department   else :inputDepartment end,"
+			+ " name        = case when :inputName        is null then e.name         else :inputName end,"
+			+ " email       = case when :inputEmail       is null then e.email        else :inputEmail end,"
+			+ " jobPosition = case when :inputJobPosition is null then e.jobPosition  else :inputJobPosition end,"
+			+ " birthDate   = case when :inputBirthDate   is null then e.birthDate    else :inputBirthDate end,"
+			+ " arrivalDate = case when :inputArrivalDate is null then e.arrivalDate  else :inputArrivalDate end,"
+			+ " annualLeave = case when :inputAnnualLeave = 0    then e.annualLeave  else :inputAnnualLeave end,"
+			+ " sickLeave   = case when :inputSickLeave   = 0    then e.sickLeave    else :inputSickLeave end"
 			+ " where e.id = :inputId")
 	public int updateInfo(@Param("inputId") String id, //
 			@Param("inputDepartment") String department, //
@@ -49,6 +46,28 @@ public interface EmployeeDao extends JpaRepository<Employee, String> {
 
 //	@Modifying(clearAutomatically = true)
 //	@Transactional
-//	@Query(value = "update Employee set  =:inputActive where id = :inputId")
-//	public int updatePassword(@Param("inputId") String id, @Param("inputPwd") String newPwd);
-};
+//	@Query(value = "UPDATE Employee as e SET "
+//			+ " department 	  	= COALESCE ( :inputDepartment, e.department), "
+//			+ " name			= COALESCE  ( :inputName, e.name), "
+//			+ " email 			= COALESCE  ( :inputEmail, e.email), "
+//			+ " jobPosition 	= COALESCE  ( :inputJobPosition, e.jobPosition), "
+//			+ " birthDate 		= COALESCE  ( :inputBirthDate , e.birthDate), "
+//			+ " arrivalDate 	= COALESCE  ( :inputArrivalDate, e.arrivalDate), "
+//			+ " annualLeave 	= CASE WHEN :inputAnnualLeave 	= 0 	THEN e.annualLeave ELSE :inputAnnualLeave END, "
+//			+ " sickLeave 		= CASE WHEN :inputSickLeave 	= 0	 	THEN e.sickLeave ELSE :inputSickLeave END "
+//			+ " WHERE e.id = :inputId")
+//	public int updateInfo1(@Param("inputId") String id, //
+//			@Param("inputDepartment") String department, //
+//			@Param("inputName") String name, //
+//			@Param("inputEmail") String email, //
+//			@Param("inputJobPosition") String jobPosition, //
+//			@Param("inputBirthDate") LocalDate birthDate, //
+//			@Param("inputArrivalDate") LocalDate arrivalDate, //
+//			@Param("inputAnnualLeave") int annualLeave, //
+//			@Param("inputSickLeave") int sickLeave);
+	
+//	@Modifying(clearAutomatically = true)
+//	@Transactional
+//	@Query(value = "update Employee set pwd = :inputpwd where id = :inputId")
+//	public int updatePassword(@Param("input") String employeeId, @Param("inputpwd") String newpwd);
+}

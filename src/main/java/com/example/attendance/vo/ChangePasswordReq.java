@@ -3,17 +3,17 @@ package com.example.attendance.vo;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ChangePasswordReq {
-	
+
 	private String id;
-	
-	@JsonProperty("new_passworrd")//for postman
-	private String newPwd;
-	
-	@JsonProperty("old_passworrd")//for postman
-	private String oldPwd;
-	
-	@JsonProperty("auth_code")//for postman
+
+	@JsonProperty("old_password")
+	private String oldpwd;
+
+	@JsonProperty("auth_code")
 	private String authCode;
+
+	@JsonProperty("new_password")
+	private String newpwd;
 
 	public String getId() {
 		return id;
@@ -23,20 +23,12 @@ public class ChangePasswordReq {
 		this.id = id;
 	}
 
-	public String getNewPwd() {
-		return newPwd;
+	public String getOldpwd() {
+		return oldpwd;
 	}
 
-	public void setNewPwd(String newPwd) {
-		this.newPwd = newPwd;
-	}
-
-	public String getOldPwd() {
-		return oldPwd;
-	}
-
-	public void setOldPwd(String oldPwd) {
-		this.oldPwd = oldPwd;
+	public void setOldpwd(String oldpwd) {
+		this.oldpwd = oldpwd;
 	}
 
 	public String getAuthCode() {
@@ -45,6 +37,14 @@ public class ChangePasswordReq {
 
 	public void setAuthCode(String authCode) {
 		this.authCode = authCode;
+	}
+
+	public String getNewpwd() {
+		return newpwd;
+	}
+
+	public void setNewpwd(String newpwd) {
+		this.newpwd = newpwd;
 	}
 	
 	

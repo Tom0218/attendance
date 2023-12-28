@@ -3,9 +3,9 @@ package com.example.attendance.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.attendance.entity.JobPosition;
+import com.example.attendance.entity.JobPosision;
 
 @Repository
-public interface JobPositionDao extends JpaRepository<JobPosition,String>{
+public interface JobPosisionDao extends JpaRepository<JobPosision, String>{
 
 }

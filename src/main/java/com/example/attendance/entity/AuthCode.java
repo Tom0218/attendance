@@ -1,5 +1,6 @@
 package com.example.attendance.entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -8,48 +9,30 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "anth_code")
+@Table(name = "auth_code")
 public class AuthCode {
 
 	@Id
 	@Column(name = "employee_id")
 	private String employeeId;
-	
+
 	@Column(name = "auth_code")
 	private String authCode;
-	
+
 	@Column(name = "auth_datetime")
-	private LocalDateTime  authDateTime;
+	private LocalDateTime authDatetime;
 
 	public AuthCode() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
 
-	
-
-
-	public AuthCode(String employeeId, String authCode, LocalDateTime authDateTime) {
+	public AuthCode(String employeeId, String authCode, LocalDateTime authDatetime) {
 		super();
 		this.employeeId = employeeId;
 		this.authCode = authCode;
-		this.authDateTime = authDateTime;
+		this.authDatetime = authDatetime;
 	}
-
-
-
-
-
-	public AuthCode(String employeeId, String authCode) {
-		super();
-		this.employeeId = employeeId;
-		this.authCode = authCode;
-	}
-
-
-
-
 
 	public String getEmployeeId() {
 		return employeeId;
@@ -67,25 +50,12 @@ public class AuthCode {
 		this.authCode = authCode;
 	}
 
-
-
-
-
-	public LocalDateTime getAuthDateTime() {
-		return authDateTime;
+	public LocalDateTime getAuthDatetime() {
+		return authDatetime;
 	}
 
-
-
-
-
-	public void setAuthDateTime(LocalDateTime authDateTime) {
-		this.authDateTime = authDateTime;
+	public void setAuthDatetime(LocalDateTime authDatetime) {
+		this.authDatetime = authDatetime;
 	}
 
-	
-	
-	
-	
-	
 }

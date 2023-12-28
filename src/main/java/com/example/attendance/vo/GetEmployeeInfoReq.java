@@ -2,30 +2,28 @@ package com.example.attendance.vo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class GerEmployeeInfoReq {
+public class GetEmployeeInfoReq {
 
-	@JsonProperty("caller_Id")
+	@JsonProperty("caller_id")
 	private String callerId;
-	
-	@JsonProperty("target_Id")
-	private String targertId;
+
+	@JsonProperty("target_id")
+	private String targetId;
 
 	public String getCallerId() {
 		return callerId;
 	}
 
-	
 	public void setCallerId(String callerId) {
 		this.callerId = callerId;
 	}
-	
-	public String getTargertId() {
-		return targertId;
+
+	public String getTargetId() {
+		return targetId;
 	}
 
-	public void setTargertId(String targertId) {
-		this.targertId = targertId;
+	public void setTargetId(String targetId) {
+		this.targetId = targetId;
 	}
-	
-	
+
 }

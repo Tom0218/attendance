@@ -1,9 +1,9 @@
 package com.example.attendance.vo;
 
 public class ForgotPasswordReq {
-	
+
 	private String id;
-	
+
 	private String email;
 
 	public String getId() {
@@ -21,7 +21,5 @@ public class ForgotPasswordReq {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	
 
 }

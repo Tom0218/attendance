@@ -10,18 +10,17 @@ import javax.persistence.Table;
 public class LeaveType {
 
 	@Id
-	@Column(name="id")
+	@Column(name = "id")
 	private int id;
-	
-	@Column(name="type")
-	private String type;
+
+	@Column(name = "type")
+	private int type;
 
 	public LeaveType() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public LeaveType(int id, String type) {
+	public LeaveType(int id, int type) {
 		super();
 		this.id = id;
 		this.type = type;
@@ -35,13 +34,12 @@ public class LeaveType {
 		this.id = id;
 	}
 
-	public String getType() {
+	public int getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(int type) {
 		this.type = type;
 	}
-	
-	
+
 }

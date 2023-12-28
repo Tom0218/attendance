@@ -1,4 +1,4 @@
-package com.example.attendance.Controller;
+package com.example.attendance.controller;
 
 import javax.servlet.http.HttpSession;
 
@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.attendance.contants.RtnCode;
+import com.example.attendance.constants.RtnCode;
 import com.example.attendance.service.ifs.EmployeeService;
 import com.example.attendance.vo.BasicRes;
 import com.example.attendance.vo.ChangePasswordReq;
-import com.example.attendance.vo.EmployeeCreatReq;
+import com.example.attendance.vo.EmployeeCreateReq;
 import com.example.attendance.vo.EmployeeRes;
 import com.example.attendance.vo.ForgotPasswordReq;
-import com.example.attendance.vo.GerEmployeeInfoReq;
+import com.example.attendance.vo.GetEmployeeInfoReq;
 import com.example.attendance.vo.LoginReq;
 
 @RestController
@@ -26,17 +26,11 @@ public class EmployeeController {
 	private EmployeeService service;
 
 	@PostMapping(value = "api/attendance/login")
-	// requestionbody須將id與pwd包成物件
-	// 單獨帶入的話用@RequestParam，getmapping
 	public BasicRes login(@RequestBody LoginReq req, HttpSession session) {
 		if (session.getAttribute(req.getId()) == null) {
 			return service.login(req.getId(), req.getPwd(), session);
 		}
-		session.setAttribute("id", req.getId());
-		session.setAttribute("password", req.getPwd());
-		session.setMaxInactiveInterval(300);// 設定session有效時間，單位:second
 		return new BasicRes(RtnCode.SUCCESSFUL);
-
 	}
 
 	@GetMapping(value = "api/attendance/login1")
@@ -46,53 +40,52 @@ public class EmployeeController {
 			return service.login(id, pwd, session);
 		}
 		return new BasicRes(RtnCode.SUCCESSFUL);
-
 	}
 
 	@GetMapping(value = "api/attendance/logout")
 	public BasicRes logout(HttpSession session) {
+		// 讓整個session失效
 		session.invalidate();
 		return new BasicRes(RtnCode.SUCCESSFUL);
 	}
 
 	@PostMapping(value = "api/attendance/employee/create")
-	public BasicRes create(@RequestBody EmployeeCreatReq req, HttpSession session) {
-		// 以session判斷是否已登入
+	public BasicRes create(@RequestBody EmployeeCreateReq req, HttpSession session) {
+		// 登入
 		if (session.getAttribute(req.getCreatorId()) == null) {
 			return new BasicRes(RtnCode.PLEASE_LOGIN_FIRST);
 		}
-		// 判斷登入者權限可否create
+		// 權限檢查
 		if (!session.getAttribute(req.getCreatorId()).toString().equalsIgnoreCase("admin")) {
 			return new BasicRes(RtnCode.UNAUTHORIZATED);
 		}
 		return service.create(req);
-
 	}
 
-	// 需登入
 	@PostMapping(value = "api/attendance/employee/change_password")
 	public BasicRes changePassword(@RequestBody ChangePasswordReq req, HttpSession session) {
 		if (session.getAttribute(req.getId()) == null) {
 			return new BasicRes(RtnCode.PLEASE_LOGIN_FIRST);
 		}
-		return service.changePassword(req.getId(), req.getOldPwd(), req.getNewPwd());
+		return service.changePassword(req.getId(), req.getOldpwd(), req.getNewpwd());
 	}
 
 	@PostMapping(value = "api/attendance/employee/forgot_password")
-	public BasicRes forgotPassword1(@RequestBody ForgotPasswordReq req) {
+	public BasicRes forgotPassword(@RequestBody ForgotPasswordReq req) {
 		return service.forgotPassword(req.getId(), req.getEmail());
 	}
 
 	@PostMapping(value = "api/attendance/employee/change_password_by_auth_code")
 	public BasicRes changePasswordByAuthCode(@RequestBody ChangePasswordReq req) {
-		return service.changePasswordByAuthCode(req.getId(), req.getAuthCode(), req.getNewPwd());
+		return service.changePasswordByAuthCode(req.getId(), req.getAuthCode(), req.getNewpwd());
 	}
-	
-	//取得自己的資訊
-	@PostMapping("api/attendance/employee/get_info")
-	public EmployeeRes findByEmployeeId(@RequestBody GerEmployeeInfoReq req, HttpSession session) {
+
+	// 取得自己的資訊
+	@PostMapping(value = "api/attendance/employee/get_info")
+	public EmployeeRes findByEmployeeId(@RequestBody GetEmployeeInfoReq req, HttpSession session) {
+		//判斷登入是否成功
 		if (session.getAttribute(req.getCallerId()) == null) {
-			return new EmployeeRes(RtnCode.PLEASE_LOGIN_FIRST,null);
+			return new EmployeeRes(RtnCode.PLEASE_LOGIN_FIRST, null);
 		}
 		return service.findByEmployeeId(req.getCallerId());
 	}

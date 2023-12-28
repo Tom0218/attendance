@@ -53,11 +53,10 @@ public class Employee {
 
 	public Employee() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Employee(String id, String department, String name, String pwd, String email, String jobPosition,
-			LocalDate birthDate, LocalDate arrivalDate, LocalDate resignationDate, String quitReason, Boolean active,
+			LocalDate birthDate, LocalDate arrivalDate, LocalDate resignationDate, String quitReason, boolean active,
 			int annualLeave, int sickLeave) {
 		super();
 		this.id = id;
@@ -74,21 +73,19 @@ public class Employee {
 		this.annualLeave = annualLeave;
 		this.sickLeave = sickLeave;
 	}
-	
-	
 
-	public Employee(String id, String department, String name, String pwd, String email, String jobPosition,
-			LocalDate birthDate, LocalDate arrivalDate, Boolean active) {
+	public Employee(String id, String department, String name, String pwd, String email, boolean active,
+			String jobPosition, LocalDate birthDate, LocalDate arrivalDate) {
 		super();
 		this.id = id;
 		this.department = department;
 		this.name = name;
 		this.pwd = pwd;
 		this.email = email;
+		this.active = active;
 		this.jobPosition = jobPosition;
 		this.birthDate = birthDate;
 		this.arrivalDate = arrivalDate;
-		this.active = active;
 	}
 
 	public String getId() {
@@ -170,8 +167,6 @@ public class Employee {
 	public void setQuitReason(String quitReason) {
 		this.quitReason = quitReason;
 	}
-	
-	
 
 	public boolean isActive() {
 		return active;
@@ -196,10 +191,5 @@ public class Employee {
 	public void setSickLeave(int sickLeave) {
 		this.sickLeave = sickLeave;
 	}
-
-	
-	
-
-	
 
 }

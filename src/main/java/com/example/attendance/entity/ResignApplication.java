@@ -12,27 +12,27 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "resign_application")
 public class ResignApplication {
-	
+
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
-	@Column(name="id")
+	@Column(name = "id")
 	private int id;
-	
-	@Column(name="employee_id")
+
+	@Column(name = "employee_id")
 	private String employeeId;
-	
-	@Column(name="department")
+
+	@Column(name = "department")
 	private String department;
-	
+
 	@Column(name = "resignation_date")
 	private LocalDate resignationDate;
 
 	@Column(name = "quit_reason")
 	private String quitReason;
-	
+
 	@Column(name = "director_review")
-	private  boolean directorReview;
-	
+	private boolean directorReview;
+
 	@Column(name = "hr_review")
 	private boolean hrReview;
 
@@ -103,9 +103,5 @@ public class ResignApplication {
 	public void setHrReview(boolean hrReview) {
 		this.hrReview = hrReview;
 	}
-
-	
-	
-	
 
 }

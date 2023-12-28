@@ -8,10 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.example.attendance.entity.LeaveApplication;
 
 @Repository
-public interface LeaveApplicationDao  extends JpaRepository<LeaveApplication, Integer>{
+public interface LeaveApplicationDao extends JpaRepository<LeaveApplication, Integer>{
 	
-	public List<LeaveApplication>findByApplicationNo(String applicationNo);
-	
+	public List< LeaveApplication> findByApplicationNo(String applicationNo);
 }
-
-
