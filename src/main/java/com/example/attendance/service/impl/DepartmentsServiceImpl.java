@@ -12,6 +12,7 @@ import com.example.attendance.constants.RtnCode;
 import com.example.attendance.entity.Departments;
 import com.example.attendance.repository.DepartmentsDao;
 import com.example.attendance.service.ifs.DepartmentsService;
+import com.example.attendance.vo.DepartmentSearchRes;
 import com.example.attendance.vo.DepartmentsCreateReq;
 import com.example.attendance.vo.DepartmentsCreateRes;
 
@@ -39,6 +40,12 @@ public class DepartmentsServiceImpl implements DepartmentsService {
 		dao.saveAll(req.getDepList());
 		return new DepartmentsCreateRes(RtnCode.SUCCESSFUL);
 
+	}
+
+	@Override
+	public DepartmentSearchRes searchAll() {
+		List<Departments>departments =  dao.findAll();
+		return new DepartmentSearchRes(RtnCode.SEARCH_DEPARTMENT_SUCCESSFUL,departments);
 	}
 
 }

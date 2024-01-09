@@ -9,6 +9,7 @@ import org.springframework.util.Assert;
 
 import com.example.attendance.entity.Departments;
 import com.example.attendance.service.ifs.DepartmentsService;
+import com.example.attendance.vo.DepartmentSearchRes;
 import com.example.attendance.vo.DepartmentsCreateReq;
 import com.example.attendance.vo.DepartmentsCreateRes;
 
@@ -33,5 +34,11 @@ public class DepartemtsTests {
 				Arrays.asList(new Departments("01", "HR"), new Departments("02", "IT")));
 		DepartmentsCreateRes res = service.create(req);
 		Assert.isTrue(res.getRtnCode().getCode() == 200, "Departments create error");
+	}
+	
+	@Test
+	public void searchAllDepTest() {
+		DepartmentSearchRes res = service.searchAll();
+		System.out.println(res.getDepartments());
 	}
 }

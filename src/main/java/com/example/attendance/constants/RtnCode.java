@@ -5,12 +5,14 @@ public enum RtnCode {
 
 	// 200 ¥u ok ªº·N«ä
 	SUCCESSFUL(200, "successful"), //
+	SEARCH_DEPARTMENT_SUCCESSFUL(200, "successful"), //
 	PARAM_ERROR(400, "Param error"), //
 	ID_HAS_EXISTED(400, "Id has existed"), //
 	DEPARTMENT_NOT_FOUND(404, "Department not found"), //
 	ID_NOT_FOUND(404, "Id not found"), //
 	PASSWORD_ERROR(400, "Password erroe"), //
 	EMPLOYEE_CREATE_ERROR(400, "Employee create erroe"), //
+	EMPLOYEE_NOT_FOUND(400,"Employee not found "),//
 	PLEASE_LOGIN_FIRST(400, "Please login first"), //
 	UNAUTHORIZATED(401, "Unauthorizated"), //
 	CHANGE_PASSWORD_ERROE(401, "Change password error"), //

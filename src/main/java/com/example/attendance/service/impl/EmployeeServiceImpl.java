@@ -2,6 +2,7 @@ package com.example.attendance.service.impl;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
@@ -10,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -18,6 +20,7 @@ import com.example.attendance.constants.JobPosition;
 import com.example.attendance.constants.RtnCode;
 import com.example.attendance.entity.AuthCode;
 import com.example.attendance.entity.Employee;
+import com.example.attendance.entity.Mail;
 import com.example.attendance.entity.ResignApplication;
 import com.example.attendance.repository.AuthCodeDao;
 import com.example.attendance.repository.DepartmentsDao;
@@ -27,13 +30,13 @@ import com.example.attendance.service.ifs.EmployeeService;
 import com.example.attendance.vo.BasicRes;
 import com.example.attendance.vo.EmployeeCreateReq;
 import com.example.attendance.vo.EmployeeRes;
+import com.example.attendance.vo.LoginRes;
 
 import net.bytebuddy.utility.RandomString;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
-	
 	@Autowired
 	private EmployeeDao dao;
 
@@ -54,23 +57,23 @@ public class EmployeeServiceImpl implements EmployeeService {
 	private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
 	@Override
-	public BasicRes create(EmployeeCreateReq req) {
-		if (!StringUtils.hasText(req.getId()) || !StringUtils.hasText(req.getDepartment())
-				|| !StringUtils.hasText(req.getName()) || !StringUtils.hasText(req.getPwd())
-				|| !StringUtils.hasText(req.getEmail()) || !StringUtils.hasText(req.getJobPosition())
-				|| req.getArrivalDate() == null || req.getBirthDate() == null) {
+	public BasicRes create(Employee employee) {
+		if (!StringUtils.hasText(employee.getId()) || !StringUtils.hasText(employee.getDepartment())
+				|| !StringUtils.hasText(employee.getName()) || !StringUtils.hasText(employee.getPwd())
+				|| !StringUtils.hasText(employee.getEmail()) || !StringUtils.hasText(employee.getJobPosition())
+				|| employee.getArrivalDate() == null || employee.getBirthDate() == null) {
 			return new BasicRes(RtnCode.PARAM_ERROR);
 		}
-		if (dao.existsById(req.getId())) {
+		if (dao.existsById(employee.getId())) {
 			return new BasicRes(RtnCode.ID_HAS_EXISTED);
 		}
 		// check deparement_name
-		if (!departmentsDao.existsByName(req.getDepartment())) {
+		if (!departmentsDao.existsByName(employee.getDepartment())) {
 			return new BasicRes(RtnCode.DEPARTMENT_NOT_FOUND);
 		}
-		req.setPwd(encoder.encode(req.getPwd()));
+		employee.setPwd(encoder.encode(employee.getPwd()));
 		try {
-			dao.save((Employee) req);
+			dao.save((Employee) employee);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 			return new BasicRes(RtnCode.UPDATE_ERROR);
@@ -79,39 +82,47 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	}
 
+	
 	@Override
-	public BasicRes login(String id, String pwd, HttpSession session) {
+	public LoginRes login(String id, String pwd, HttpSession session) {
+		System.out.println(id+pwd);
 		if (!StringUtils.hasText(id) || !StringUtils.hasText(pwd)) {
-			return new BasicRes(RtnCode.PARAM_ERROR);
+			return new LoginRes(RtnCode.PARAM_ERROR);
 		}
 		Optional<Employee> op = dao.findById(id);
 		if (op.isEmpty()) {
-			return new BasicRes(RtnCode.ID_NOT_FOUND);
+			return new LoginRes(RtnCode.ID_NOT_FOUND);
 		}
 		Employee employee = op.get();
 		if (!encoder.matches(pwd, employee.getPwd())) {
-			return new BasicRes(RtnCode.PASSWORD_ERROR);
+			return new LoginRes(RtnCode.PASSWORD_ERROR);
 		}
 		if (!employee.isActive()) {
-			return new BasicRes(RtnCode.ACCOUNT_DEACTIVATE);
+			return new LoginRes(RtnCode.ACCOUNT_DEACTIVATE);
 		}
-		session.setAttribute(id, employee.getDepartment()); // (A01,"IT") key 部門值
+		session.setAttribute(id,employee.getDepartment());	// (A01,"IT") key 部門值
+//		session.setAttribute("id",id);
 		// 單位秒
 		session.setMaxInactiveInterval(3000);
+		System.out.println(session.getId());
 		logger.info("Login successfull");
-		return new BasicRes(RtnCode.SUCCESSFUL);
+		return new LoginRes(employee,RtnCode.SUCCESSFUL);
 	}
 
 	@Override
 	public BasicRes changePassword(String id, String oldpwd, String newpwd) {
+		System.out.println(id+oldpwd+newpwd);
 		if (!StringUtils.hasText(id) || !StringUtils.hasText(oldpwd) || !StringUtils.hasText(newpwd)) {
 			return new BasicRes(RtnCode.PARAM_ERROR);
 		}
 		if (oldpwd.equals(newpwd)) {
 			return new BasicRes(RtnCode.OLD_PASSWORD_AND_NEW_PASSWORD_ARE_IDENTICAL);
 		}
+		if(dao.findById(id).isEmpty()) {
+			return new BasicRes(RtnCode.ID_NOT_FOUND);
+		}
 		Employee employee = dao.findById(id).get();
-		if (encoder.matches(oldpwd, employee.getPwd())) {
+		if (!encoder.matches(oldpwd, employee.getPwd())) {
 			return new BasicRes(RtnCode.PASSWORD_ERROR);
 		}
 		employee.setPwd(encoder.encode(newpwd));
@@ -142,6 +153,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 				return new BasicRes(RtnCode.ID_NOT_FOUND);
 			}
 		}
+		System.out.println(employee.getEmail());
 		String randomPwd = RandomString.make(12);
 		employee.setPwd(encoder.encode(randomPwd));
 		// 產生驗證碼 ( 有效時間30分鐘
@@ -150,6 +162,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		try {
 			dao.save(employee);
 			authCodeDao.save(new AuthCode(employee.getId(), authCode, now.plusMinutes(authCodeExpiredTime)));
+			Mail.sentSignUpMail(employee.getEmail(),authCode,randomPwd);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 			return new BasicRes(RtnCode.UPDATE_ERROR);
@@ -225,6 +238,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return new BasicRes(RtnCode.SUCCESSFUL);
 	}
 
+	@CacheEvict(cacheNames = "updateActive", allEntries = true)
 	@Override
 	public BasicRes updateActive(String executorId, String employeeId, boolean isActive) {
 		// 不用 executorId 判斷是否為空，因為此方法必須是 login 後才使用, 在login 方法那已有判斷
@@ -253,6 +267,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	// HR 去填寫員工離職單
+	@CacheEvict(cacheNames = "updateResign", allEntries = true)
 	@Override
 	public BasicRes updateResign(String executorId, String employeeId) {
 		// 不用 executorId 判斷是否為空，因為此方法必須是 login 後才使用, 在login 方法那已有判斷
@@ -292,6 +307,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	}
 
+	@CacheEvict(cacheNames = "updateInfo", allEntries = true)
 	@Override
 	public BasicRes updateInfo(String executorId, Employee employee) {
 		// 不用 executorId 判斷是否為空，因為此方法必須是 login 後才使用, 在login 方法那已有判斷
@@ -312,11 +328,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return new BasicRes(RtnCode.SUCCESSFUL);
 	}
 
+	@CacheEvict(cacheNames = "update", allEntries = true)
 	@Override
 	public EmployeeRes findByEmployeeId(String employeeId) {
 		return new EmployeeRes(RtnCode.SUCCESSFUL, dao.findById(employeeId).get());
 	}
 
+	@CacheEvict(cacheNames = "update", allEntries = true)
 	@Override
 	public EmployeeRes findStaffInfo(String callerId, String targetId) {
 		// 不用 callerId 判斷是否為空，因為此方法必須是 login 後才使用, 在login 方法那已有判斷
@@ -338,5 +356,36 @@ public class EmployeeServiceImpl implements EmployeeService {
 		}
 		return new EmployeeRes(RtnCode.PERMISSION_DENIED, null);
 	}
+
+	@CacheEvict(cacheNames = "update", allEntries = true)
+	@Override
+	public EmployeeRes search(String id, String name, String department) {
+		id = StringUtils.hasText(id) ? id : "";
+		name = StringUtils.hasText(name) ? name : "";
+		department = StringUtils.hasText(department) ? department : "";
+//		System.out.println("name:" + name);
+		List<Employee> employeeList = dao.findEmployee(id, name, department);
+		if (employeeList.isEmpty()) {
+			return new EmployeeRes(RtnCode.EMPLOYEE_NOT_FOUND);
+		}
+		return new EmployeeRes(employeeList, RtnCode.SUCCESSFUL);
+	}
+
+	@Override
+	public BasicRes create(EmployeeCreateReq req) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public EmployeeRes findSupervisor(String department) {
+		List<Employee> employeeList = dao.findSupervisor(department);
+		return new EmployeeRes(employeeList,RtnCode.SUCCESSFUL);
+	}
+
+
+
+	
 
 }

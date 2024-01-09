@@ -17,6 +17,7 @@ import com.example.attendance.constants.ReviewType;
 import com.example.attendance.constants.RtnCode;
 import com.example.attendance.entity.Employee;
 import com.example.attendance.entity.LeaveApplication;
+import com.example.attendance.entity.Mail;
 import com.example.attendance.repository.EmployeeDao;
 import com.example.attendance.repository.LeaveApplicationDao;
 import com.example.attendance.service.ifs.LeaveApplicationService;
@@ -66,6 +67,8 @@ public class LeaveApplicationServiceImpl implements LeaveApplicationService {
 		try {
 			dao.save((LeaveApplication) req);
 			// °O email µ¹ reviewer
+			Mail.sentLeaveApplyMail(reviewer.getEmail());
+			
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 			return new BasicRes(RtnCode.LEAVE_APPLICATION_ERROR);

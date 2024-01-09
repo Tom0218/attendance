@@ -15,6 +15,18 @@ public class ChangePasswordReq {
 	@JsonProperty("new_password")
 	private String newpwd;
 
+	public ChangePasswordReq() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public ChangePasswordReq(String id, String authCode, String newpwd) {
+		super();
+		this.id = id;
+		this.authCode = authCode;
+		this.newpwd = newpwd;
+	}
+
 	public String getId() {
 		return id;
 	}
@@ -46,7 +58,5 @@ public class ChangePasswordReq {
 	public void setNewpwd(String newpwd) {
 		this.newpwd = newpwd;
 	}
-	
-	
 
 }

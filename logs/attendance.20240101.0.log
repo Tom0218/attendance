@@ -1,0 +1,58 @@
+18:49:23.999 INFO  [main][AttendanceApplication.logStarting(StartupInfoLogger.java:55)] Starting AttendanceApplication using Java 17.0.2 on DESKTOP-DG5SNN9 with PID 14908 (D:\產業尖兵\Java_project\attendance\bin\main started by TOM HSIEH in D:\產業尖兵\Java_project\attendance)
+18:49:24.011 INFO  [main][AttendanceApplication.logStartupProfileInfo(SpringApplication.java:632)] No active profile set, falling back to 1 default profile: "default"
+18:49:26.328 INFO  [main][RepositoryConfigurationDelegate.registerRepositoriesIn(RepositoryConfigurationDelegate.java:132)] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+18:49:26.566 INFO  [main][RepositoryConfigurationDelegate.registerRepositoriesIn(RepositoryConfigurationDelegate.java:201)] Finished Spring Data repository scanning in 211 ms. Found 7 JPA repository interfaces.
+18:49:28.021 INFO  [main][TomcatWebServer.initialize(TomcatWebServer.java:108)] Tomcat initialized with port(s): 8080 (http)
+18:49:28.039 INFO  [main][Http11NioProtocol.log(DirectJDKLog.java:173)] Initializing ProtocolHandler ["http-nio-8080"]
+18:49:28.046 INFO  [main][StandardService.log(DirectJDKLog.java:173)] Starting service [Tomcat]
+18:49:28.047 INFO  [main][StandardEngine.log(DirectJDKLog.java:173)] Starting Servlet engine: [Apache Tomcat/9.0.82]
+18:49:28.386 INFO  [main][[/].log(DirectJDKLog.java:173)] Initializing Spring embedded WebApplicationContext
+18:49:28.387 INFO  [main][ServletWebServerApplicationContext.prepareWebApplicationContext(ServletWebServerApplicationContext.java:292)] Root WebApplicationContext: initialization completed in 4171 ms
+18:49:28.817 INFO  [main][HikariDataSource.getConnection(HikariDataSource.java:110)] HikariPool-1 - Starting...
+18:49:29.310 INFO  [main][HikariDataSource.getConnection(HikariDataSource.java:123)] HikariPool-1 - Start completed.
+18:49:29.433 INFO  [main][LogHelper.logPersistenceUnitInformation(LogHelper.java:31)] HHH000204: Processing PersistenceUnitInfo [name: default]
+18:49:29.696 INFO  [main][Version.logVersion(Version.java:44)] HHH000412: Hibernate ORM core version 5.6.15.Final
+18:49:30.375 INFO  [main][Version.<clinit>(JavaReflectionManager.java:56)] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+18:49:30.719 INFO  [main][Dialect.<init>(Dialect.java:175)] HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+18:49:32.079 INFO  [main][JtaPlatformInitiator.initiateService(JtaPlatformInitiator.java:52)] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+18:49:32.103 INFO  [main][LocalContainerEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:437)] Initialized JPA EntityManagerFactory for persistence unit 'default'
+18:49:33.444 WARN  [main][JpaBaseConfiguration$JpaWebConfiguration.openEntityManagerInViewInterceptor(JpaBaseConfiguration.java:223)] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+18:49:34.146 INFO  [main][Http11NioProtocol.log(DirectJDKLog.java:173)] Starting ProtocolHandler ["http-nio-8080"]
+18:49:34.242 INFO  [main][TomcatWebServer.start(TomcatWebServer.java:220)] Tomcat started on port(s): 8080 (http) with context path ''
+18:49:34.262 INFO  [main][AttendanceApplication.logStarted(StartupInfoLogger.java:61)] Started AttendanceApplication in 11.559 seconds (JVM running for 13.263)
+18:52:22.447 INFO  [http-nio-8080-exec-2][[/].log(DirectJDKLog.java:173)] Initializing Spring DispatcherServlet 'dispatcherServlet'
+18:52:22.489 INFO  [http-nio-8080-exec-2][DispatcherServlet.initServletBean(FrameworkServlet.java:525)] Initializing Servlet 'dispatcherServlet'
+18:52:22.578 INFO  [http-nio-8080-exec-2][DispatcherServlet.initServletBean(FrameworkServlet.java:547)] Completed initialization in 88 ms
+22:27:52.691 WARN  [http-nio-8080-exec-6][SessionIdGeneratorBase.log(DirectJDKLog.java:173)] Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [258] milliseconds.
+22:27:53.405 INFO  [http-nio-8080-exec-6][EmployeeServiceImpl.login(EmployeeServiceImpl.java:101)] Login successfull
+23:14:19.840 INFO  [main][AttendanceApplication.logStarting(StartupInfoLogger.java:55)] Starting AttendanceApplication using Java 17.0.2 on DESKTOP-DG5SNN9 with PID 1192 (D:\產業尖兵\Java_project\attendance\bin\main started by TOM HSIEH in D:\產業尖兵\Java_project\attendance)
+23:14:19.862 INFO  [main][AttendanceApplication.logStartupProfileInfo(SpringApplication.java:632)] No active profile set, falling back to 1 default profile: "default"
+23:14:21.983 INFO  [main][RepositoryConfigurationDelegate.registerRepositoriesIn(RepositoryConfigurationDelegate.java:132)] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+23:14:22.182 INFO  [main][RepositoryConfigurationDelegate.registerRepositoriesIn(RepositoryConfigurationDelegate.java:201)] Finished Spring Data repository scanning in 175 ms. Found 7 JPA repository interfaces.
+23:14:23.643 INFO  [main][TomcatWebServer.initialize(TomcatWebServer.java:108)] Tomcat initialized with port(s): 8080 (http)
+23:14:23.667 INFO  [main][Http11NioProtocol.log(DirectJDKLog.java:173)] Initializing ProtocolHandler ["http-nio-8080"]
+23:14:23.672 INFO  [main][StandardService.log(DirectJDKLog.java:173)] Starting service [Tomcat]
+23:14:23.673 INFO  [main][StandardEngine.log(DirectJDKLog.java:173)] Starting Servlet engine: [Apache Tomcat/9.0.82]
+23:14:24.252 INFO  [main][[/].log(DirectJDKLog.java:173)] Initializing Spring embedded WebApplicationContext
+23:14:24.253 INFO  [main][ServletWebServerApplicationContext.prepareWebApplicationContext(ServletWebServerApplicationContext.java:292)] Root WebApplicationContext: initialization completed in 4170 ms
+23:14:24.625 INFO  [main][HikariDataSource.getConnection(HikariDataSource.java:110)] HikariPool-1 - Starting...
+23:14:25.224 INFO  [main][HikariDataSource.getConnection(HikariDataSource.java:123)] HikariPool-1 - Start completed.
+23:14:25.332 INFO  [main][LogHelper.logPersistenceUnitInformation(LogHelper.java:31)] HHH000204: Processing PersistenceUnitInfo [name: default]
+23:14:25.555 INFO  [main][Version.logVersion(Version.java:44)] HHH000412: Hibernate ORM core version 5.6.15.Final
+23:14:25.972 INFO  [main][Version.<clinit>(JavaReflectionManager.java:56)] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+23:14:26.281 INFO  [main][Dialect.<init>(Dialect.java:175)] HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+23:14:27.795 INFO  [main][JtaPlatformInitiator.initiateService(JtaPlatformInitiator.java:52)] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+23:14:27.824 INFO  [main][LocalContainerEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:437)] Initialized JPA EntityManagerFactory for persistence unit 'default'
+23:14:29.202 WARN  [main][JpaBaseConfiguration$JpaWebConfiguration.openEntityManagerInViewInterceptor(JpaBaseConfiguration.java:223)] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+23:14:29.866 INFO  [main][Http11NioProtocol.log(DirectJDKLog.java:173)] Starting ProtocolHandler ["http-nio-8080"]
+23:14:29.973 INFO  [main][TomcatWebServer.start(TomcatWebServer.java:220)] Tomcat started on port(s): 8080 (http) with context path ''
+23:14:29.991 INFO  [main][AttendanceApplication.logStarted(StartupInfoLogger.java:61)] Started AttendanceApplication in 11.285 seconds (JVM running for 15.797)
+23:14:50.471 INFO  [http-nio-8080-exec-1][[/].log(DirectJDKLog.java:173)] Initializing Spring DispatcherServlet 'dispatcherServlet'
+23:14:50.473 INFO  [http-nio-8080-exec-1][DispatcherServlet.initServletBean(FrameworkServlet.java:525)] Initializing Servlet 'dispatcherServlet'
+23:14:50.483 INFO  [http-nio-8080-exec-1][DispatcherServlet.initServletBean(FrameworkServlet.java:547)] Completed initialization in 9 ms
+23:15:22.560 INFO  [http-nio-8080-exec-4][EmployeeServiceImpl.login(EmployeeServiceImpl.java:101)] Login successfull
+23:17:15.381 INFO  [http-nio-8080-exec-6][EmployeeServiceImpl.login(EmployeeServiceImpl.java:101)] Login successfull
+23:20:14.287 INFO  [http-nio-8080-exec-7][EmployeeServiceImpl.login(EmployeeServiceImpl.java:101)] Login successfull
+23:25:37.943 INFO  [http-nio-8080-exec-10][EmployeeServiceImpl.login(EmployeeServiceImpl.java:101)] Login successfull
+23:31:43.959 INFO  [http-nio-8080-exec-10][EmployeeServiceImpl.login(EmployeeServiceImpl.java:101)] Login successfull
+23:34:00.535 INFO  [http-nio-8080-exec-4][EmployeeServiceImpl.login(EmployeeServiceImpl.java:101)] Login successfull

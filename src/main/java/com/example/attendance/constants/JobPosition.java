@@ -3,10 +3,10 @@ package com.example.attendance.constants;
 public enum JobPosition {
 
 	ADMIN(99, "Admin"), //
-	SUPERVISOR(21, "Supervisor"), //
-	DIRECTOR(20, "Director"), //
+	DIRECTOR(21, "Director"), //協理
+	SUPERVISOR(20, "Supervisor"), //主任
 	SENIOR(2, "Senior"), //
-	GETNERAL(1, "Getneral"),//
+	GETNERAL(1, "General"),//
 
 	;
 

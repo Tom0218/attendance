@@ -1,6 +1,7 @@
 package com.example.attendance;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,31 +12,57 @@ import org.springframework.util.Assert;
 
 import com.example.attendance.entity.Employee;
 import com.example.attendance.repository.EmployeeDao;
+import com.example.attendance.vo.EmployeeRes;
 
 @SpringBootTest
 public class EmployeeTest {
-	
+
+	@Autowired
 	@Value("${authcode.expired.time}")
 	private int authCodeExpiredTime;
 
-	//預設 :10分鐘
-//	@Value("${authcode.expired.time :10}")
-//	private int authCodeExpiredTime;
-	
 	@Autowired
 	private EmployeeDao employeeDao;
+
+	private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+	// 預設 :10分鐘
+//	@Value("${authcode.expired.time :10}")
+//	private int authCodeExpiredTime;
 
 	@Test
 	public void createAdminTest() {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		Employee employee = employeeDao.save(new Employee("Admin", "ADMIN", "Asmin",
-				encoder.encode("$ADMiN^_^Otp"),"admin@G", true, "99", LocalDate.now(),
-				LocalDate.now()));
+		// String id, String department, String name, String pwd, String email, boolean
+		// active,
+		// String jobPosition, LocalDate birthDate, LocalDate arrivalDate
+		Employee employee = employeeDao.save(new Employee("superadmin", "admin", "superadmin",
+				encoder.encode("superadmin"), "superadmin", true, "superadmin", LocalDate.now(), LocalDate.now()));
 		Assert.isTrue(employee != null, "Create admin erroe");
+	}
+
+	@Test
+	public void searchTest() {
+		// id; name; department
+		List<Employee> employeeList = employeeDao.findAllByIdContainingAndNameAndDepartment("", "", "");
+		List<Employee> employeeList2 = employeeDao.findEmployee("tom", "", "");
+		if (employeeList.isEmpty()) {
+			System.out.println("employee not found!");
+		}
+		for (Employee employee : employeeList) {
+			System.out.println("employeeList :" + employee.getName());
+		}
+		for (Employee employee : employeeList2) {
+			System.out.println("employeeList2 :" + employee.getName());
+		}
 	}
 	
 	@Test
-	public void PwTest() {
-		System.out.println(authCodeExpiredTime);
+	public void findSupervisorTest (){
+		List<Employee> employeeList =  employeeDao.findSupervisor("IT");
+		for(Employee employee:employeeList) {
+			System.out.println(employee.getName());
+		}
 	}
+
 }

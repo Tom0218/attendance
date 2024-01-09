@@ -1,11 +1,11 @@
 package com.example.attendance.vo;
 
 import com.example.attendance.constants.RtnCode;
+import com.example.attendance.entity.Employee;
 
 public class BasicRes {
 
 	public RtnCode rtnCode;
-	
 
 	public BasicRes() {
 		super();

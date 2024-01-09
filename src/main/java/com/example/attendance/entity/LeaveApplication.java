@@ -40,9 +40,6 @@ public class LeaveApplication {
 	@Column(name = "total_hour")
 	private int totalHour;
 
-	@Column(name = "reason")
-	private String reason;
-
 	@Column(name = "leave_reason")
 	private String leaveReason;
 
@@ -73,9 +70,9 @@ public class LeaveApplication {
 	}
 
 	public LeaveApplication(String applicationNo, String employeeId, String employeeDepartment, String leaveType,
-			LocalDateTime leaveStartDatetime, LocalDateTime leaveEndDatetime, int totalHour, String reason,
-			String leaveReason, String reviewerId, LocalDateTime reviewerDatetime, String reviewerStatus,
-			String rejectReason, LocalDateTime appliedDatetime, LocalDateTime updateDatetime) {
+			LocalDateTime leaveStartDatetime, LocalDateTime leaveEndDatetime, int totalHour, String leaveReason,
+			String reviewerId, LocalDateTime reviewerDatetime, String reviewerStatus, String rejectReason,
+			LocalDateTime appliedDatetime, LocalDateTime updateDatetime) {
 		super();
 		this.applicationNo = applicationNo;
 		this.employeeId = employeeId;
@@ -84,7 +81,6 @@ public class LeaveApplication {
 		this.leaveStartDatetime = leaveStartDatetime;
 		this.leaveEndDatetime = leaveEndDatetime;
 		this.totalHour = totalHour;
-		this.reason = reason;
 		this.leaveReason = leaveReason;
 		this.reviewerId = reviewerId;
 		this.reviewerDatetime = reviewerDatetime;
@@ -92,6 +88,21 @@ public class LeaveApplication {
 		this.rejectReason = rejectReason;
 		this.appliedDatetime = appliedDatetime;
 		this.updateDatetime = updateDatetime;
+	}
+
+	public LeaveApplication(String employeeId, String employeeDepartment, String leaveType,
+			LocalDateTime leaveStartDatetime, LocalDateTime leaveEndDatetime, int totalHour, String leaveReason,
+			String reviewerId,byte[] certification) {
+		super();
+		this.employeeId = employeeId;
+		this.employeeDepartment = employeeDepartment;
+		this.leaveType = leaveType;
+		this.leaveStartDatetime = leaveStartDatetime;
+		this.leaveEndDatetime = leaveEndDatetime;
+		this.totalHour = totalHour;
+		this.leaveReason = leaveReason;
+		this.reviewerId = reviewerId;
+		this.certification = certification;
 	}
 
 	public LeaveApplication(LeaveApplication application) {
@@ -103,7 +114,6 @@ public class LeaveApplication {
 		this.leaveStartDatetime = application.getLeaveStartDatetime();
 		this.leaveEndDatetime = application.getLeaveEndDatetime();
 		this.totalHour = application.getTotalHour();
-		this.reason = application.getReason();
 		this.leaveReason = application.getLeaveReason();
 		this.reviewerId = application.getReviewerId();
 		this.reviewerDatetime = application.getReviewerDatetime();
@@ -175,14 +185,6 @@ public class LeaveApplication {
 
 	public void setTotalHour(int totalHour) {
 		this.totalHour = totalHour;
-	}
-
-	public String getReason() {
-		return reason;
-	}
-
-	public void setReason(String reason) {
-		this.reason = reason;
 	}
 
 	public String getLeaveReason() {

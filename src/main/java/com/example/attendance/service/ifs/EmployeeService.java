@@ -6,12 +6,15 @@ import com.example.attendance.entity.Employee;
 import com.example.attendance.vo.BasicRes;
 import com.example.attendance.vo.EmployeeCreateReq;
 import com.example.attendance.vo.EmployeeRes;
+import com.example.attendance.vo.LoginRes;
 
 public interface EmployeeService {
 
 	public BasicRes create(EmployeeCreateReq req);
+	
+	public BasicRes create(Employee Employee);
 
-	public BasicRes login(String id, String pwd, HttpSession session);
+	public LoginRes login(String id, String pwd, HttpSession session);
 
 	public BasicRes changePassword(String id, String oldpwd, String newpwd);
 
@@ -32,9 +35,15 @@ public interface EmployeeService {
 	public BasicRes resingApplication(String employeeId);
 
 	public BasicRes updateInfo(String executorId, Employee employee);
+	
+	public EmployeeRes search(String id, String name, String department);
 
 	public EmployeeRes findByEmployeeId(String employeeId);
 
 	public EmployeeRes findStaffInfo(String callerId, String targetId);
+	
+	public EmployeeRes findSupervisor(String department);
+	
+	
 
 }

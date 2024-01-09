@@ -16,20 +16,22 @@ repositories {
 }
 
 dependencies {
+	
 	implementation 'org.springframework.boot:spring-boot-starter'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	// spring boot data jpa
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	//mysql connector
 	implementation 'mysql:mysql-connector-java:8.0.31'
-
 	implementation 'org.springframework.boot:spring-boot-starter-cache'
-	
 	implementation 'com.github.ben-manes.caffeine:caffeine'
-
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
-	
 	implementation 'org.springframework.boot:spring-boot-starter-security'
+	//寄信
+	implementation 'com.sun.mail:javax.mail:1.6.2'
+	
+	//修改不須重啟springboot
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'

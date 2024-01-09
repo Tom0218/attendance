@@ -2,10 +2,14 @@ package com.example.attendance.constants;
 
 public enum LeaveType {
 
-	PERSONAL("Personl"), //
-	SICK("Sick"), //
-	OFFICIAL("Official"), //
-	ANNUAL("Annual"),//
+	OFFICIAL_LEAVE("Official_leave"), // そ安
+	PERSONAL_LEAVE("Personl_leave"), //ㄆ安
+	SICK_LEAVE("Sick_leave"), //痜安
+	FUNERAL_LEAVE("Funeral leave"),//赤安
+	ANNUAL_LEAVE("Annual leave"),// 安
+	MATERNITY_LEAVE("Maternity leave"),//玻安
+	MENSTRUATION_LEAVE("Menstruation leave"),//ネ瞶安
+	PRE_MATERNITY_LEAVE("Pre-MaternityLeave")//抄玻安
 	;
 
 	private String type;
@@ -28,8 +32,8 @@ public enum LeaveType {
 	}
 
 	public static boolean needCertification(String type) {
-		if (type.equalsIgnoreCase(LeaveType.OFFICIAL.getType()) 
-				|| type.equalsIgnoreCase(LeaveType.SICK.getType())) {
+		if (type.equalsIgnoreCase(LeaveType.OFFICIAL_LEAVE.getType()) 
+				|| type.equalsIgnoreCase(LeaveType.SICK_LEAVE.getType())) {
 			return true;
 		}
 		return false;

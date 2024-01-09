@@ -11,4 +11,5 @@ import com.example.attendance.entity.LeaveApplication;
 public interface LeaveApplicationDao extends JpaRepository<LeaveApplication, Integer>{
 	
 	public List< LeaveApplication> findByApplicationNo(String applicationNo);
+	
 }
