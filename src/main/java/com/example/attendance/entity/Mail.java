@@ -69,7 +69,7 @@ public class Mail {
 		}
 	}
 	
-	public static void sentLeaveApplyMail(String reviewerEmail) {
+	public static void sentLeaveApplyMail(String reviewerEmail, int serialNo) {
 		String senderName = "Y.T";
 		String senderEmail = "mark29737148mark@gmail.com"; // email填入自己的email
 		String senderPassword = "fbqevgkcqjzdeduo"; // pwd填入向google申請的應用程式密碼
@@ -101,10 +101,10 @@ public class Mail {
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail));
 
 			// 設定信件主題
-			message.setSubject("註冊成功");
+			message.setSubject("假單待審核");
 
 			// 設定信件內容
-			message.setText("您有一封新的請假申請");
+			message.setText("假單("+serialNo+")待審核");
 
 			// 發送信件
 			Transport.send(message);

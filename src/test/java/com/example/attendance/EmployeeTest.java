@@ -64,5 +64,12 @@ public class EmployeeTest {
 			System.out.println(employee.getName());
 		}
 	}
+	
+	@Test
+	public void test() {
+		int x ;
+		x = 0b111;
+		System.out.println(x);
+	}
 
 }

@@ -1,6 +1,5 @@
 package com.example.attendance.entity;
 
-import java.sql.Blob;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -46,11 +45,11 @@ public class LeaveApplication {
 	@Column(name = "reviewer_id")
 	private String reviewerId;
 
-	@Column(name = "reviewer_datetime")
-	private LocalDateTime reviewerDatetime;
+	@Column(name = "review_datetime")
+	private LocalDateTime reviewDatetime;
 
-	@Column(name = "reviewer_status")
-	private String reviewerStatus;
+	@Column(name = "review_status")
+	private String reviewStatus;
 
 	@Column(name = "reject_reason")
 	private String rejectReason;
@@ -71,8 +70,7 @@ public class LeaveApplication {
 
 	public LeaveApplication(String applicationNo, String employeeId, String employeeDepartment, String leaveType,
 			LocalDateTime leaveStartDatetime, LocalDateTime leaveEndDatetime, int totalHour, String leaveReason,
-			String reviewerId, LocalDateTime reviewerDatetime, String reviewerStatus, String rejectReason,
-			LocalDateTime appliedDatetime, LocalDateTime updateDatetime) {
+			String reviewerId, LocalDateTime appliedDatetime, LocalDateTime updateDatetime) {
 		super();
 		this.applicationNo = applicationNo;
 		this.employeeId = employeeId;
@@ -83,16 +81,29 @@ public class LeaveApplication {
 		this.totalHour = totalHour;
 		this.leaveReason = leaveReason;
 		this.reviewerId = reviewerId;
-		this.reviewerDatetime = reviewerDatetime;
-		this.reviewerStatus = reviewerStatus;
-		this.rejectReason = rejectReason;
 		this.appliedDatetime = appliedDatetime;
+		this.updateDatetime = updateDatetime;
+	}
+
+	public LeaveApplication(String applicationNo, String employeeId, String employeeDepartment, String leaveType,
+			LocalDateTime leaveStartDatetime, LocalDateTime leaveEndDatetime, int totalHour, String leaveReason,
+			String reviewerId, LocalDateTime updateDatetime) {
+		super();
+		this.applicationNo = applicationNo;
+		this.employeeId = employeeId;
+		this.employeeDepartment = employeeDepartment;
+		this.leaveType = leaveType;
+		this.leaveStartDatetime = leaveStartDatetime;
+		this.leaveEndDatetime = leaveEndDatetime;
+		this.totalHour = totalHour;
+		this.leaveReason = leaveReason;
+		this.reviewerId = reviewerId;
 		this.updateDatetime = updateDatetime;
 	}
 
 	public LeaveApplication(String employeeId, String employeeDepartment, String leaveType,
 			LocalDateTime leaveStartDatetime, LocalDateTime leaveEndDatetime, int totalHour, String leaveReason,
-			String reviewerId,byte[] certification) {
+			String reviewerId, LocalDateTime appliedDatetime) {
 		super();
 		this.employeeId = employeeId;
 		this.employeeDepartment = employeeDepartment;
@@ -102,25 +113,34 @@ public class LeaveApplication {
 		this.totalHour = totalHour;
 		this.leaveReason = leaveReason;
 		this.reviewerId = reviewerId;
+		this.appliedDatetime = appliedDatetime;
+	}
+
+	public LeaveApplication(int serialNo, String applicationNo, String employeeId, String employeeDepartment,
+			String leaveType, LocalDateTime leaveStartDatetime, LocalDateTime leaveEndDatetime, int totalHour,
+			String leaveReason, String reviewerId, LocalDateTime reviewDatetime, String reviewStatus,
+			String rejectReason, LocalDateTime appliedDatetime, LocalDateTime updateDatetime, byte[] certification) {
+		super();
+		this.serialNo = serialNo;
+		this.applicationNo = applicationNo;
+		this.employeeId = employeeId;
+		this.employeeDepartment = employeeDepartment;
+		this.leaveType = leaveType;
+		this.leaveStartDatetime = leaveStartDatetime;
+		this.leaveEndDatetime = leaveEndDatetime;
+		this.totalHour = totalHour;
+		this.leaveReason = leaveReason;
+		this.reviewerId = reviewerId;
+		this.reviewDatetime = reviewDatetime;
+		this.reviewStatus = reviewStatus;
+		this.rejectReason = rejectReason;
+		this.appliedDatetime = appliedDatetime;
+		this.updateDatetime = updateDatetime;
 		this.certification = certification;
 	}
 
 	public LeaveApplication(LeaveApplication application) {
-		super();
-		this.applicationNo = application.getApplicationNo();
-		this.employeeId = application.getEmployeeId();
-		this.employeeDepartment = application.getEmployeeDepartment();
-		this.leaveType = application.getLeaveType();
-		this.leaveStartDatetime = application.getLeaveStartDatetime();
-		this.leaveEndDatetime = application.getLeaveEndDatetime();
-		this.totalHour = application.getTotalHour();
-		this.leaveReason = application.getLeaveReason();
-		this.reviewerId = application.getReviewerId();
-		this.reviewerDatetime = application.getReviewerDatetime();
-		this.reviewerStatus = application.getReviewerStatus();
-		this.rejectReason = application.getRejectReason();
-		this.appliedDatetime = application.getAppliedDatetime();
-		this.updateDatetime = application.getUpdateDatetime();
+		// TODO Auto-generated constructor stub
 	}
 
 	public int getSerialNo() {
@@ -203,20 +223,20 @@ public class LeaveApplication {
 		this.reviewerId = reviewerId;
 	}
 
-	public LocalDateTime getReviewerDatetime() {
-		return reviewerDatetime;
+	public LocalDateTime getReviewDatetime() {
+		return reviewDatetime;
 	}
 
-	public void setReviewerDatetime(LocalDateTime reviewerDatetime) {
-		this.reviewerDatetime = reviewerDatetime;
+	public void setReviewerDatetime(LocalDateTime reviewDatetime) {
+		this.reviewDatetime = reviewDatetime;
 	}
 
-	public String getReviewerStatus() {
-		return reviewerStatus;
+	public String getReviewStatus() {
+		return reviewStatus;
 	}
 
-	public void setReviewerStatus(String reviewerStatus) {
-		this.reviewerStatus = reviewerStatus;
+	public void setReviewerStatus(String reviewStatus) {
+		this.reviewStatus = reviewStatus;
 	}
 
 	public String getRejectReason() {
